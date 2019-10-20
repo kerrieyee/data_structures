@@ -12,7 +12,7 @@ class SinglyLinkedList
 
   def push_front(node)
     @tail = node
-    node.next = head if head
+    node.next = head
     @head = node
   end
 
@@ -80,6 +80,7 @@ class SinglyLinkedList
   end
 
   def add_before(existing_node, new_node)
+    raise "arguments cannot be nil" if existing_node.nil? || new_node.nil?
     raise "No nodes in the list" if head.nil?
     if existing_node == head
       push_front(new_node)
@@ -91,6 +92,7 @@ class SinglyLinkedList
   end
 
   def add_after(existing_node, new_node)
+    raise "arguments cannot be nil" if existing_node.nil? || new_node.nil?
     raise "No nodes in the list" if head.nil?
     if existing_node == tail
       push_back(new_node)
@@ -171,7 +173,7 @@ end
 class Node
   attr_reader :key
   attr_accessor :next
-  def initialize(key, next_node)
+  def initialize(key, next_node = nil)
     @key = key
     @next = next_node
   end
