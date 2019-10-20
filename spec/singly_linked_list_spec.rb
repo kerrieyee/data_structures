@@ -361,4 +361,21 @@ describe SinglyLinkedList do
     end
   end
 
+  describe "#get_nth_node" do
+    it "raises an error if list is empty" do
+      expect{ sll.get_nth_node(0) }.to raise_error(RuntimeError)
+    end
+
+    it "raises an error if arguments are improper" do
+      expect{ sll.get_nth_node("hi") }.to raise_error(RuntimeError)
+    end
+
+    it "returns the correct node" do
+      [node, node_1, node_2, node_3].each { |n| sll.push_back(n) }
+      expect(sll.get_nth_node(2)).to eql(node_2)
+      expect(sll.get_nth_node(0)).to eql(node)
+      expect(sll.get_nth_node(3)).to eql(node_3)
+    end
+  end
+
 end
