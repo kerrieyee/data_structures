@@ -112,6 +112,28 @@ class SinglyLinkedList
     end
     count
   end
+
+  def reverse
+    raise "No nodes in the list" if head.nil?
+    return if @head.next.nil?
+    curr_node = head
+    until curr_node.next.nil? do
+      next_node = curr_node.next
+      curr_node.next = next_node.next
+      push_front(next_node)
+    end
+    @tail = curr_node
+  end
+
+  def get_keys
+    keys = [ @head.key ]
+    current_node = @head
+    until current_node.next.nil? do
+      current_node = current_node.next
+      keys << current_node.key
+    end
+    keys
+  end
 end
 
 class Node
