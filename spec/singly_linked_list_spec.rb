@@ -337,4 +337,28 @@ describe SinglyLinkedList do
       expect(sll.size).to eql(3)
     end
   end
+
+  describe "#reverse" do
+    it "raises an error if list is empty" do
+      expect{ sll.reverse }.to raise_error(RuntimeError)
+    end
+
+    it "does nothing if only 1 node in list" do
+      sll.push_back(node)
+      expect{
+        sll.reverse
+      }.to_not change{sll}
+    end
+
+    it "reverses the list if more than 1 node" do
+      [node, node_1, node_2, node_3].each { |n| sll.push_back(n) }
+      expect(sll.head).to eql(node)
+      expect(sll.tail).to eql(node_3)
+      sll.reverse
+      expect(sll.head).to eql(node_3)
+      expect(sll.tail).to eql(node)
+      expect(sll.head.next).to eql(node_2)
+    end
+  end
+
 end
