@@ -378,4 +378,25 @@ describe SinglyLinkedList do
     end
   end
 
+  describe "#get_middle_node" do
+    #https://www.geeksforgeeks.org/write-a-c-function-to-print-the-middle-of-the-linked-list/
+    it "raises an error if list is empty" do
+      expect{ sll.get_middle_node }.to raise_error(RuntimeError)
+    end
+
+    it "returns the only node if only 1 node" do
+      sll.push_back(node)
+      expect(sll.get_middle_node).to eql("The middle element is [#{node.key}]")
+    end
+
+    it "returns the middle node key if odd number of nodes" do
+      [node_1, node_2, node_3].each { |n| sll.push_back(n) }
+      expect(sll.get_middle_node).to eql("The middle element is [#{node_2.key}]")
+    end
+
+    it "returns the middle node key if even number of nodes" do
+      [node, node_1, node_2, node_3].each { |n| sll.push_back(n) }
+      expect(sll.get_middle_node).to eql("The middle element is [#{node_2.key}]")
+    end
+  end
 end
