@@ -4,6 +4,9 @@ require 'rspec'
 describe SinglyLinkedList do
   let(:sll) { SinglyLinkedList.new }
   let(:node) { Node.new(5, nil) }
+  let(:node_1) { Node.new(10, nil) }
+  let(:node_2) { Node.new(20, nil) }
+  let(:node_3) { Node.new(30, nil) }
 
   describe "#empty?" do
     it "returns true if list is empty" do
@@ -22,16 +25,14 @@ describe SinglyLinkedList do
     end
 
     it "adds a node to the front of the list" do
-      n = Node.new(10, nil)
       expect{
-        sll.push_front(n)
-      }.to change{ sll.head.key }.from(node.key).to(n.key)
+        sll.push_front(node_1)
+      }.to change{ sll.head.key }.from(node.key).to(node_1.key)
     end
 
     it "updates the next pointer on the node to be added" do
-      n = Node.new(10, nil)
       expect{
-        sll.push_front(n)
+        sll.push_front(node_1)
       }.to change{ sll.head.next }.from(nil).to(node)
     end
 
@@ -61,7 +62,7 @@ describe SinglyLinkedList do
     end
 
     it "reallocates the head to point to the next node" do
-      sll.push_front(Node.new(50,nil))
+      sll.push_front(node_1)
       sll.push_front(node)
       expect{
         sll.pop_front
@@ -75,17 +76,15 @@ describe SinglyLinkedList do
     end
 
     it "adds a node to the back of the list" do
-      n = Node.new(10, nil)
       expect{
-        sll.push_back(n)
-      }.to change{ sll.tail }.from(node).to(n)
+        sll.push_back(node_1)
+      }.to change{ sll.tail }.from(node).to(node_1)
     end
 
     it "updates the next pointer on the previous node" do
-      n = Node.new(10, nil)
       expect{
-        sll.push_back(n)
-      }.to change{ sll.head.next }.from(nil).to(n)
+        sll.push_back(node_1)
+      }.to change{ sll.head.next }.from(nil).to(node_1)
     end
 
     it "updates the head if there were no nodes in the list" do
@@ -114,12 +113,11 @@ describe SinglyLinkedList do
     end
 
     it "reallocates the tail to point to the next node" do
-      n = Node.new(50, nil)
       sll.push_back(node)
-      sll.push_back(n)
+      sll.push_back(node_1)
       expect{
         sll.pop_back
-      }.to change{ sll.tail }.from(n).to(node)
+      }.to change{ sll.tail }.from(node_1).to(node)
     end
   end
 
@@ -136,8 +134,7 @@ describe SinglyLinkedList do
       end
 
       it "returns false if the node does not exist" do
-        n = Node.new(10, nil)
-        expect(sll.node_exists?(n)).to eql(false)
+        expect(sll.node_exists?(node_1)).to eql(false)
       end
 
       it "returns true if the node exists" do
@@ -147,7 +144,7 @@ describe SinglyLinkedList do
 
     context "if there is more than one node in the list" do
       before do
-        [10, 20, 30].each { |n| sll.push_front(Node.new(n, nil)) }
+        [node_1, node_2, node_3].each { |n| sll.push_front(n) }
       end
 
       it "returns false if the node does not exist" do
@@ -162,10 +159,6 @@ describe SinglyLinkedList do
   end
 
   describe "#find_before" do
-    let(:node_1) { Node.new(10, nil) }
-    let(:node_2) { Node.new(20, nil) }
-    let(:node_3) { Node.new(30, nil) }
-
     context "if there are no nodes in linked list" do
       it "raises an error" do
         expect{ sll.find_before(node) }.to raise_error(RuntimeError)
@@ -181,9 +174,7 @@ describe SinglyLinkedList do
 
     context "if there is more than one node in linked list" do
       before do
-        sll.push_back(node_1)
-        sll.push_back(node_2)
-        sll.push_back(node_3)
+        [node_1, node_2, node_3].each { |n| sll.push_back(n) }
       end
 
       it "returns nil if the node is the head" do
@@ -204,9 +195,6 @@ describe SinglyLinkedList do
   end
 
   describe "#erase" do
-    let(:node_1) { Node.new(10, nil) }
-    let(:node_2) { Node.new(20, nil) }
-    let(:node_3) { Node.new(30, nil) }
 
     context "if there are no nodes in linked list" do
       it "raises an error" do
@@ -222,9 +210,7 @@ describe SinglyLinkedList do
 
     context "if there is more than one node in linked list" do
       before do
-        sll.push_back(node_1)
-        sll.push_back(node_2)
-        sll.push_back(node_3)
+        [node_1, node_2, node_3].each { |n| sll.push_back(n) }
       end
 
       context "node to erase is the head" do
@@ -263,9 +249,6 @@ describe SinglyLinkedList do
   end
 
   describe "#add_before" do
-    let(:node_1) { Node.new(10, nil) }
-    let(:node_2) { Node.new(20, nil) }
-
     context "if no nodes in linked list" do
       it "raises an error" do
         expect{ sll.add_before(node, node_1) }.to raise_error(RuntimeError)
@@ -281,8 +264,7 @@ describe SinglyLinkedList do
 
     context "if there is more than one node in linked list" do
       before do
-        sll.push_back(node_1)
-        sll.push_back(node_2)
+        [node_1, node_2].each { |n| sll.push_back(n) }
       end
 
       it "updates the previous node and added node properly" do
@@ -303,8 +285,6 @@ describe SinglyLinkedList do
   end
 
   describe "#add_after" do
-    let(:node_1) { Node.new(10, nil) }
-    let(:node_2) { Node.new(20, nil) }
 
     context "if no nodes in linked list" do
       it "raises an error" do
