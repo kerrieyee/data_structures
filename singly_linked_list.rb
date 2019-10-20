@@ -134,6 +134,38 @@ class SinglyLinkedList
     end
     keys
   end
+
+  def get_nth_node(n)
+    raise "n must be a number greater than zero" unless n.is_a?(Integer) && n >= 0
+    raise "No nodes in the list" if empty?
+    curr_index = 0
+    current_node = @head
+    until curr_index == n do
+      current_node = current_node.next
+      curr_index += 1
+    end
+    current_node
+  end
+
+  def get_middle_node
+    raise "No nodes in the list" if empty?
+    fast = head
+    slow = head
+    while fast != nil && fast.next != nil do
+      slow = slow.next
+      fast = fast.next.next
+    end
+
+    "The middle element is [#{slow.key}]"
+  end
+
+  def get_middle_node_slow
+    #inefficient_way
+    raise "No nodes in the list" if empty?
+    n = size/2
+    get_nth_node(n)
+    "The middle element is [#{n.key}]"
+  end
 end
 
 class Node
