@@ -100,6 +100,18 @@ class SinglyLinkedList
       existing_node.next = new_node
     end
   end
+
+  def size
+    return 0 if head.nil?
+    return 1 if head.next.nil?
+    count = 1
+    current_node = @head
+    until current_node.next.nil? do
+      count += 1
+      current_node = current_node.next
+    end
+    count
+  end
 end
 
 class Node
