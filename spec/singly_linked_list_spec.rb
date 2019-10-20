@@ -321,4 +321,20 @@ describe SinglyLinkedList do
       end
     end
   end
+
+  describe "#size" do
+    it "returns zero if no nodes in list" do
+      expect(sll.size).to eql(0)
+    end
+
+    it "returns 1 if only 1 node in the list" do
+      sll.push_back(node)
+      expect(sll.size).to eql(1)
+    end
+
+    it "returns the correct count if more than 1 node in the list" do
+      [node_1, node_2, node_3].each { |n| sll.push_front(n) }
+      expect(sll.size).to eql(3)
+    end
+  end
 end
