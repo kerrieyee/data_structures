@@ -3,10 +3,10 @@ require 'rspec'
 
 describe SinglyLinkedList do
   let(:sll) { SinglyLinkedList.new }
-  let(:node) { Node.new(5, nil) }
-  let(:node_1) { Node.new(10, nil) }
-  let(:node_2) { Node.new(20, nil) }
-  let(:node_3) { Node.new(30, nil) }
+  let(:node) { Node.new(5) }
+  let(:node_1) { Node.new(10) }
+  let(:node_2) { Node.new(20) }
+  let(:node_3) { Node.new(30) }
 
   describe "#empty?" do
     it "returns true if list is empty" do
