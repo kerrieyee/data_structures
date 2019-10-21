@@ -1,4 +1,4 @@
-require_relative '../doubly_linked_list'
+require_relative '../../linked_lists/doubly_linked_list'
 require 'rspec'
 
 describe DoublyLinkedList do

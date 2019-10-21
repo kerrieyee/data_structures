@@ -1,4 +1,4 @@
-require_relative '../singly_linked_list'
+require_relative '../../linked_lists/singly_linked_list'
 require 'rspec'
 
 describe SinglyLinkedList do
