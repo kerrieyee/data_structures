@@ -44,22 +44,20 @@ class DoublyLinkedList
 
   def delete(node)
     raise "No nodes in the list" if head.nil?
+    if node == head
+      @head = node.next
+    end
 
-    if node == head || node == tail
-      if node == head
-        @head = node.next
-        @head.previous = nil if head
-      end
+    if node == tail
+      @tail = node.previous
+    end
 
-      if node == tail
-        @tail = tail.previous
-        @tail.next = nil if tail
-      end
-    else
-      prev_node = node.previous
-      next_node = node.next
-      prev_node.next = next_node
-      next_node.previous = prev_node
+    if !node.next.nil?
+      node.next.previous = node.previous
+    end
+
+    if !node.previous.nil?
+      node.previous.next = node.next
     end
   end
 
