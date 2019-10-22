@@ -5,21 +5,21 @@ class StackLinkedList
     @head = nil
   end
 
-  def push(value)
-    n = Node.new(value)
+  def push(key)
+    n = Node.new(key)
     n.next = head.next if head
     @head = n
   end
 
   def top
     return nil if @head.nil?
-    head.value
+    head.key
   end
 
   def pop
-    old_value = head.value
+    old_key = head.key
     @head = head.next
-    old_value
+    old_key
   end
 
   def empty?
@@ -28,11 +28,11 @@ class StackLinkedList
 end
 
 class Node
-  attr_reader :value
+  attr_reader :key
   attr_accessor :next
 
-  def initialize(value)
-    @value = value
+  def initialize(key)
+    @key = key
     @next = nil
   end
 end
