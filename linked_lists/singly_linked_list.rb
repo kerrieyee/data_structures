@@ -1,0 +1,2 @@
+class SinglyLinkedList
+end
