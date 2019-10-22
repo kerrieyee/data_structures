@@ -24,7 +24,6 @@ class StackArray
   end
 
   def empty?
-    p num_elements
     num_elements.zero?
   end
 end
