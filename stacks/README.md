@@ -1,5 +1,8 @@
 # # Stacks
 
+##Call outs
+- you can implement via linked list or array.  The specs are slightly different for the array specs.  Please read the comments in the spec/stack_spec.rb file
+
 ## Basic Methods
 - Push - add key
 - Top - fetch last added key
