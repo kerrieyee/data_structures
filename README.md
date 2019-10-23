@@ -1,18 +1,19 @@
 # data_structures
 Some simple rspec tests for data structures in Ruby.
 
-Based mostly on https://www.coursera.org/learn/data-structures/ with problems from other sites and wwcode.
+Based mostly on https://www.coursera.org/learn/data-structures/ with additional input from other sites and wwcode.
 
 Currently Completed
 - Linked Lists + Doubly linked lists
-
-Todo:
 - Stacks
 - Queues
-- Hashmaps
 - Binary Tree
+
+Todo:
+- Hashmaps
 - ...
 
 To use:
 - `bundle install`
-- `rspec spec`
+- checkout our own branch and try to make the specs turn green
+- To run specs for a specific data structure e.g. linked_lists: `rspec spec/linked_lists`
