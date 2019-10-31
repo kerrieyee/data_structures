@@ -8,17 +8,6 @@ describe SinglyLinkedList do
   let(:node_2) { Node.new(20) }
   let(:node_3) { Node.new(30) }
 
-  describe "#empty?" do
-    it "returns true if list is empty" do
-      expect(sll.empty?).to be(true)
-    end
-
-    it "returns false if list has a node" do
-      sll.push_front(node)
-      expect(sll.empty?).to be(false)
-    end
-  end
-
   describe "#push_front" do
     before do
       sll.push_front(node)
@@ -37,9 +26,19 @@ describe SinglyLinkedList do
     end
 
     it "updates the tail if there were no nodes in the list" do
-      sll.push_front(node)
-      expect(sll.head).to_not be_nil
+      expect(sll.head).to eql(node)
       expect(sll.head).to eql(sll.tail)
+    end
+  end
+
+  describe "#empty?" do
+    it "returns true if list is empty" do
+      expect(sll.empty?).to be(true)
+    end
+
+    it "returns false if list has a node" do
+      sll.push_front(node)
+      expect(sll.empty?).to be(false)
     end
   end
 
