@@ -1,0 +1,56 @@
+# Priority Queues
+
+# Methods
+- Insert(element) - inserts an element
+- ExtractMax - extracts an element with max priority
+- Remove(index) - removes element at that index
+- GetMax - returns the element with max priority
+- ChangePriority(index, priority) - changes the priority of the element at the given index
+
+## Possible Implementations
+- Array
+  - Unsorted
+    - Insert - O(1)
+    - ExtractMax - O(n)
+  - Sorted
+    - Insert - O(n)
+      - finding place to insert using binary search is O(log(n))
+      - but must shift all elements down in the array to insert making this 0(n)
+    - ExtractMax - O(1)
+      - max is just the last element in the array
+- DoublyLinkedList w/tail
+  - Unsorted
+    - Insert - O(1)
+    - ExtractMax - O(n)
+  - Sorted
+    - Insert - O(1)
+    - ExtractMax - O(n)
+      - cannot use binary search to find insertion point so it's O(n)
+      - however once you find it the insert itself is O(1)
+- BinaryHeap
+  - One of the most common ways of creating a priority queue
+  - Want to keep tree shallow so want it to be a complete binary tree so every method is at most O(log(n))
+  - Binary max-heap
+    - Binary tree w/nodes that have 0-2 children
+    - value of the parent nodes are at least the value of their children
+  - Insert - O(log(n))
+    - slightly problematic.  You normally have to find an element that has less than two children
+    - then check if it's value is less than the parent node.
+    - If value is greater than parent node, you have to SiftUp (or swap child node with parent until it fits the definition for a binary heap)
+      - The SiftUp function is at most O(TreeHeight)
+  - ExtractMax - O(log(n))
+    - Max is just the root node so easy to find
+    - To extract
+      - switch one of the leaf nodes with root
+      - then SiftDown.
+        - select left or right tree, whichever is greater, and swap until it fits the definition for a binary heap
+  - GetMax - O(1)
+    - it's just the root of the tree
+  - ChangePriority - O(TreeHeight)
+    - just need to SiftUp or SiftDown to make sure it fits the definition of binary heap definition
+  - Remove - O(TreeHeight)
+    - combination of ChangePriority and ExtractMax
+    - essentially change priority of the node you want to remove to infinity so it will sift up to be the root
+    - then call ExtractMax
+  - Stored As Array
+    - if binary heap is stored as array parent is i/2 and left child is 2i and right child is 2i + 1
