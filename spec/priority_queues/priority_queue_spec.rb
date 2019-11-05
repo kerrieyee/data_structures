@@ -195,4 +195,43 @@ describe PriorityQueue do
       end
     end
   end
+
+  describe '#build_max_heap' do
+    let(:arr) { [19,14,28,15,16,7,27,15,21,21,5,2] }
+    let(:pq) { PriorityQueue.new(10) }
+
+    before do
+      pq.build_max_heap(arr)
+    end
+
+    it "builds a valid heap" do
+      expect(heap_valid?(pq.heap)).to eql(true)
+    end
+
+    it "sets the size and max_size" do
+      expect(pq.size).to eql(arr.size)
+      expect(pq.max_size).to eql(arr.size)
+    end
+  end
+
+  describe "#heap_sort" do
+    let(:arr) { [19,14,28,15,16,7,27,15,21,21,5,2] }
+    let(:pq) { PriorityQueue.new(10) }
+
+    before do
+      pq.heap_sort(arr)
+    end
+
+    it "sorts the heap" do
+      expect(pq.heap).to eql(arr.sort)
+    end
+  end
+
+  def heap_valid?(arr)
+    arr.each_with_index do |e, i|
+      return false if arr[2*i + 1] && arr[2*i + 1] > e
+      return false if arr[2*i + 2] && arr[2*i + 2] > e
+    end
+    return true
+  end
 end
