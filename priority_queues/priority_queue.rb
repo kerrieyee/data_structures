@@ -7,14 +7,30 @@ class PriorityQueue
     @heap = Array.new(size)
   end
 
-  def get_max
-    @heap[0]
+  def heap_sort(arr)
+    build_max_heap(arr)
+    (arr.length - 1).times do
+      val = @heap[0]
+      @heap[0] = @heap[size - 1]
+      @heap[size - 1] = val
+      @size -= 1
+      sift_down(@heap[0], 0)
+    end
   end
 
   def build_max_heap(arr)
-    arr.each do |e|
-      insert(e)
+    @heap = arr
+    @size = arr.length
+    @max_size = arr.length
+
+    (size/2).downto(0) do |i|
+      sift_down(arr[i], i)
     end
+    @heap
+  end
+
+  def get_max
+    @heap[0]
   end
 
   def insert(e)
@@ -55,6 +71,14 @@ class PriorityQueue
 
 private
 
+  def left_index(i)
+    (2*i) + 1
+  end
+
+  def right_index(i)
+    (2*i) + 2
+  end
+
   def sift_up(e, i)
     child_i = i
     #need to take into account array starting with index 0
@@ -73,23 +97,22 @@ private
 
   def sift_down(e, i)
     current_i = i
-    left = @heap[2*current_i + 1]
-    right = @heap[2*current_i + 2]
+    l = left_index(i)
+    r = right_index(i)
 
+    if l < size && @heap[l] > @heap[current_i]
+      current_i = l
+    end
 
-    while (left && left > @heap[current_i]) || (right && right > @heap[current_i])
-      if left && right
-        child_i = @heap[2*current_i + 1] > @heap[2*current_i + 2] ? (2*current_i + 1) : (2*current_i + 2)
-      else
-        child_i = @heap[2*current_i + 1] ? (2*current_i + 1) : (2*current_i + 2)
-      end
-      parent_val = @heap[current_i]
-      @heap[current_i] = @heap[child_i]
-      @heap[child_i] = parent_val
+    if r < size && @heap[r] > @heap[current_i]
+      current_i = r
+    end
 
-      current_i = child_i
-      left = @heap[(2*current_i + 1)]
-      right = @heap[(2*current_i + 2)]
+    if current_i != i
+      val = @heap[i]
+      @heap[i] = @heap[current_i]
+      @heap[current_i] = val
+      sift_down(e, current_i)
     end
   end
 end
