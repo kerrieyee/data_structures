@@ -51,11 +51,20 @@ describe Stack do
       expect(stack.pop).to eql(1)
     end
 
-    it "removes the element from the stack" do
+    it "removes the element from the stack if only one element" do
       stack.push(1)
       expect{
         stack.pop
       }.to change{ stack.empty? }.from(false).to(true)
+    end
+
+    it "removes the element from the stack" do
+      stack.push(1)
+      stack.push(2)
+      expect{
+        stack.pop
+      }.to_not change{ stack.empty? }
+      expect(stack.top).to eql(2)
     end
   end
 end
