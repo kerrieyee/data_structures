@@ -64,7 +64,7 @@ describe Stack do
       expect{
         stack.pop
       }.to_not change{ stack.empty? }
-      expect(stack.top).to eql(2)
+      expect(stack.top).to eql(1)
     end
   end
 end
